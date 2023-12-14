@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Стальные сцепления</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+  <!-- шапка -->
+  <div class="header">
+    <img src="фоточка1.png" width="170" height=""/>
+  </div>
+  <!-- контейнер, который хранит в себе все белое пространство, в котором находится калькулятор -->
+  <div class="container">
+    <h1>Расчет веса прямоугольной трубы</h1>
+    <div class="form-group">
+      <label for="den" class="type">Вид трубы</label>
+      <div class="buttons">
+        <div class="container1">
+            <a href="circle.html" class="btn effect01" target="_parent"><span>Круглая</span></a>
+            <a href="rectangle.html" class="btn effect02" target="_parent"><span>Прямоугольная</span></a>
+            <a href="square.html" class="btn effect03" target="_parent"><span>Квадратная</span></a>
+          </div>
+      </div>
+    </div>
+    <!-- onsubmit - это вызов скрипта (отправка формы) при нажатии мыши или кнопок клавиатуры. т.е. в этот метод отправляются-->
+    <form id="calculatorForm" onsubmit="calculateWeight(); return false;">
+      <div class="form-group">
+        <label for="diameter" class="diameter">Сторона прямоугольника a (мм)</label>
+        <input type="number" step="0.01" id="diameter" required>
+      </div>
+      <div class="form-group">
+        <label for="diameter" class="diameter1">Сторона прямоугольника b (мм)</label>
+        <input type="number" step="0.01" id="diameter1" required>
+      </div>
+      <div class="form-group1">
+        <label for="thickness">Толщина стенки трубы (мм)</label>
+        <input type="number" step="0.01" id="thickness" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="denn" class="material">Материал</label>
+          <p><select id="select1">
+           <option value="1">Углеродистая сталь</option>
+           <option value="2">Нержавеющая сталь</option>
+           <option value="3">Дюралюминий</option>
+           <option value="4">Титан</option>
+           <option value="5">Медь</option>
+           <option value="6">Латунь</option>
+           <option value="7">Свинец</option>
+           <option value="8">Золото</option>
+          </select></p>
+      </div>
+      <div class="weight">
+        <label for="denn" class="meters">Длина проката (м)</label>
+        <input type="number" step="0.01" id="selection" required>
+      </div>
+      <div class="form-group">
+        <input type="submit" id="buttonclass" value="Рассчитать">
+      </div>
+    </form>
+    <div id="result"></div>
+  </div>
+  <div id="parent_popup">
+    <dialog id="modal" class="child">
+    <div class="modal-window">
+      <label id="result1"></label>
+      <label id="result2"></label>
+      <button id="close" class="close">X</button>
+    </div>
+  </dialog>
+</div>
+  <script>
+        (function() {
+    var dialog = document.getElementById('modal');
+    var dixx = document.getElementById('parent_popup');
+    document.getElementById('buttonclass').onclick = function() {
+      let pole1 = document.getElementById('thickness').value;
+      let pole2 = document.getElementById('diameter').value;
+      if(pole1==0 || pole2==0) {
+      } else {
+        dixx.style.cssText = 'background: #000; height: 100%; opacity: 0.9; position: fixed; width: 100%; z-index: 100; top: 0; left: 0;';
+        dialog.show();
+    };  
+    document.getElementById('close').onclick = function() {
+      dixx.style.cssText = '';
+        dialog.close();  
+    }; 
+  } 
+})();
+    function calculateWeight() {
+      let total = parseFloat(document.getElementById('selection').value);
+      let a = parseFloat(document.getElementById('diameter').value);
+      let b = parseFloat(document.getElementById('diameter1').value);
+      let thickness = parseFloat(document.getElementById('thickness').value);
+      var choice1 = document.getElementById("select1");
+      var value1 = choice1.value;
+      let crossSectionalArea;
+      let weightPerMeter;
+      let density;
+      let totalWeight;
+      const p = document.querySelector('.form-group1 input');
+        if(value1==1) {
+          density = 7850;
+          crossSectionalArea = (density/density)*0.0157*thickness*(a+b-2.86*thickness);
+          weightPerMeter = crossSectionalArea;
+          totalWeight = weightPerMeter*total;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из углеродистой стали равен " + weightPerMeter.toFixed(2) + " кг<br/>";
+          var element1 = document.getElementById('result2');
+          element1.innerHTML = "Общий вес погонного метра трубы из углеродистой стали равен " + totalWeight.toFixed(2) + " кг";
+        }  else if(value1==2) {
+          density = 7900;
+          crossSectionalArea = (density/7850)*0.0157*thickness*(a+b-2.86*thickness);
+          weightPerMeter = crossSectionalArea;
+          totalWeight = weightPerMeter*total;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из нержавеющей стали равен " + weightPerMeter.toFixed(2)+ " кг<br/>";
+          var element1 = document.getElementById('result2');
+          element1.innerHTML = "Общий вес погонного метра трубы из нержавеющей стали равен " + totalWeight.toFixed(2) + " кг";
+        } else if(value1==3) {
+          density = 2800;
+          crossSectionalArea = (density/7850)*0.0157*thickness*(a+b-2.86*thickness);
+          weightPerMeter = crossSectionalArea;
+          totalWeight = weightPerMeter*total;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из дюралюминия равен " + weightPerMeter.toFixed(2)+ " кг<br/>";
+          var element1 = document.getElementById('result2');
+          element1.innerHTML = "Общий вес погонного метра трубы из дюралюмния равен " + totalWeight.toFixed(2) + " кг";
+        } else if(value1==4) {
+          density = 4505;
+          crossSectionalArea = (density/7850)*0.0157*thickness*(a+b-2.86*thickness);
+          weightPerMeter = crossSectionalArea;
+          totalWeight = weightPerMeter*total;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из титана равен " + weightPerMeter.toFixed(2)+ " кг<br/>";
+          var element1 = document.getElementById('result2');
+          element1.innerHTML = "Общий вес погонного метра трубы из титана равен " + totalWeight.toFixed(2) + " кг";
+        } else if(value1==5) {
+          density = 8933;
+          crossSectionalArea = (density/7850)*0.0157*thickness*(a+b-2.86*thickness);
+          weightPerMeter = crossSectionalArea;
+          totalWeight = weightPerMeter*total;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из меди равен " + weightPerMeter.toFixed(2)+ " кг<br/>";
+          var element1 = document.getElementById('result2');
+          element1.innerHTML = "Общий вес погонного метра трубы из меди равен " + totalWeight.toFixed(2) + " кг";
+        } else if(value1==6) {
+          density = 8700;
+          crossSectionalArea = (density/7850)*0.0157*thickness*(a+b-2.86*thickness);
+          weightPerMeter = crossSectionalArea;
+          totalWeight = weightPerMeter*total;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из латуни равен " + weightPerMeter.toFixed(2)+ " кг<br/>";
+          var element1 = document.getElementById('result2');
+          element1.innerHTML = "Общий вес погонного метра трубы из латуни равен " + totalWeight.toFixed(2) + " кг";
+        } else if(value1==7) {
+          density = 11300;
+          crossSectionalArea = (density/7850)*0.0157*thickness*(a+b-2.86*thickness);
+          weightPerMeter = crossSectionalArea;
+          totalWeight = weightPerMeter*total;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из свинца равен " + weightPerMeter.toFixed(2)+ " кг<br/>";
+          var element1 = document.getElementById('result2');
+          element1.innerHTML = "Общий вес погонного метра трубы из свинца равен " + totalWeight.toFixed(2) + " кг";
+        } else if(value1==8) {
+          density = 19300;
+          crossSectionalArea = (density/7850)*0.0157*thickness*(a+b-2.86*thickness);
+          weightPerMeter = crossSectionalArea;
+          totalWeight = weightPerMeter*total;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из золота равен " + weightPerMeter.toFixed(2)+ " кг<br/>";
+          var element1 = document.getElementById('result2');
+          element1.innerHTML = "Общий вес погонного метра трубы из золота равен " + totalWeight.toFixed(2) + " кг";
+        }
+    }
+  </script>
+</body>
+</html>
