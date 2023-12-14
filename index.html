@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Стальные сцепления</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+  <!-- шапка -->
+  <div class="header">
+    <img src="фоточка1.png" width="170" height=""/>
+  </div>
+  <!-- контейнер, который хранит в себе все белое пространство, в котором находится калькулятор -->
+  <div class="container">
+    <p class="type1">Расчет веса трубы</p>
+    <div class="form-group">
+      <p for="den" class="type">Выберите форму трубы</p>
+      <div class="buttons">
+        <div class="container1">
+            <a href="circle.html" class="btn effect01" target="_parent"><span>Круглая</span></a>
+            <a href="rectangle.html" class="btn effect02" target="_parent"><span>Прямоугольная</span></a>
+            <a href="square.html" class="btn effect03" target="_parent"><span>Квадратная</span></a>
+          </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function() {
+    var dialog = document.getElementById('modal');
+    var dixx = document.getElementById('parent_popup');
+    document.getElementById('buttonclass').onclick = function() {
+      let pole1 = document.getElementById('thickness').value;
+      let pole2 = document.getElementById('diameter').value;
+      if(pole1==0 || pole2==0) {
+      } else {
+        dixx.style.cssText = 'background: #000; height: 100%; opacity: 0.9; position: fixed; width: 100%; z-index: 100; top: 0; left: 0;';
+        dialog.show();
+    };  
+    document.getElementById('close').onclick = function() {
+      dixx.style.cssText = '';
+        dialog.close();  
+    }; 
+  } 
+})();
+    function calculateWeight() {
+      let diameter = parseFloat(document.getElementById('diameter').value);
+      let thickness = parseFloat(document.getElementById('thickness').value);
+      var choice1 = document.getElementById("select1");
+      var value1 = choice1.value;
+      let crossSectionalArea;
+      let weightPerMeter;
+      let density;
+      
+      const p = document.querySelector('.form-group1 input');
+        if(value1==1) {
+          density = 7850/1000;
+          crossSectionalArea = density*thickness*(Math.PI/1000)*(diameter-thickness);
+          weightPerMeter = crossSectionalArea;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из углеродистой стали равен " + weightPerMeter.toFixed(2) + " кг";
+        }  else if(value1==2) {
+          density = 7900/1000;
+          crossSectionalArea = density*thickness*(Math.PI/1000)*(diameter-thickness);
+          weightPerMeter = crossSectionalArea;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из нержавеющей стали равен " + weightPerMeter.toFixed(2)+ " кг";
+        } else if(value1==3) {
+          density = 2800/1000;
+          crossSectionalArea = density*thickness*(Math.PI/1000)*(diameter-thickness);
+          weightPerMeter = crossSectionalArea;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из дюралюминия равен " + weightPerMeter.toFixed(2)+ " кг";
+        } else if(value1==4) {
+          density = 4505/1000;
+          crossSectionalArea = density*thickness*(Math.PI/1000)*(diameter-thickness);
+          weightPerMeter = crossSectionalArea;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из титана равен " + weightPerMeter.toFixed(2)+ " кг";
+        } else if(value1==5) {
+          density = 8933/1000;
+          crossSectionalArea = density*thickness*(Math.PI/1000)*(diameter-thickness);
+          weightPerMeter = crossSectionalArea;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из меди равен " + weightPerMeter.toFixed(2)+ " кг";
+        } else if(value1==6) {
+          density = 8700/1000;
+          crossSectionalArea = density*thickness*(Math.PI/1000)*(diameter-thickness);
+          weightPerMeter = crossSectionalArea;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из латуни равен " + weightPerMeter.toFixed(2)+ " кг";
+        } else if(value1==7) {
+          density = 11300/1000;
+          crossSectionalArea = density*thickness*(Math.PI/1000)*(diameter-thickness);
+          weightPerMeter = crossSectionalArea;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из свинца равен " + weightPerMeter.toFixed(2)+ " кг";
+        } else if(value1==8) {
+          density = 19300/1000;
+          crossSectionalArea = density*thickness*(Math.PI/1000)*(diameter-thickness);
+          weightPerMeter = crossSectionalArea;
+          var element = document.getElementById('result1');
+          element.innerHTML = "Вес одного погонного метра трубы из золота равен " + weightPerMeter.toFixed(2)+ " кг";
+        }
+    }
+  </script>
+</body>
+</html>
